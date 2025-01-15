@@ -26,7 +26,7 @@ jobs:
       - name: Process Data
         run: |
           echo "Processing data..."
-          python process_data.py  # Use a Python script to generate HTML/JS
+          python scripts/process_data.py  # Correct relative path to script. Use a Python script to generate HTML/JS
 
       # Step 4: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
