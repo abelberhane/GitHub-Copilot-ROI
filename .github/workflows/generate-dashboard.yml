@@ -14,22 +14,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Run Data Processing Script
+      # Step 2: Run Data Processing Script with Token from Secrets
       - name: Run Data Processing Script
+        env:
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_API_TOKEN }}
         run: |
-          echo "Processing data..."
           python scripts/process_data.py
 
-      # Step 3: Debug: List Files in Public Directory
-      - name: Debug - List Files in Public Directory
-        run: |
-          echo "Listing public directory contents:"
-          ls -R public || echo "Public directory not found"
-
-      # Step 4: Deploy to GitHub Pages
+      # Step 3: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public  # Ensure the public directory contains generated files
-
+          publish_dir: ./public
