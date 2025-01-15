@@ -21,7 +21,7 @@ jobs:
           python scripts/process_data.py
 
       # Step 3: Debug: List Files in Public Directory
-      - name: Debug: List Files in Public Directory
+      - name: Debug - List Files in Public Directory
         run: |
           echo "Listing public directory contents:"
           ls -R public || echo "Public directory not found"
