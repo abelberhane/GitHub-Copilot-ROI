@@ -3,8 +3,8 @@ import json
 import requests
 
 # GitHub API endpoint and organization
-API_URL = "https://api.github.com/orgs/SullyDevSquad/copilot/usage" # Update the orgs section with your own 
-ORG = "SullyDevSquad"                                               # Update your organization name here
+API_URL = "https://api.github.com/orgs/{org}/copilot/usage"
+ORG = "your_actual_org_name_here"  # Replace this with your GitHub organization name
 
 def fetch_data():
     """
@@ -16,7 +16,10 @@ def fetch_data():
     
     headers = {"Authorization": f"token {token}"}
     response = requests.get(API_URL.format(org=ORG), headers=headers)
+
     if response.status_code == 200:
+        # Debugging: Print the response data
+        print("API Response:", response.json())
         return response.json()
     else:
         raise Exception(f"Failed to fetch data: {response.status_code} {response.text}")
@@ -25,6 +28,10 @@ def calculate_metrics(data):
     """
     Calculate key metrics for the dashboard.
     """
+    # Ensure the response is a dictionary
+    if isinstance(data, list):
+        raise Exception("Unexpected data format: Expected a dictionary, got a list.")
+
     suggested_lines = data.get("suggested_lines", 0)
     accepted_lines = data.get("accepted_lines", 0)
     total_users = data.get("total_users", 0)
