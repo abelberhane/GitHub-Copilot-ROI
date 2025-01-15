@@ -4,7 +4,7 @@ import json
 
 # GitHub API endpoint and organization
 API_URL = "https://api.github.com/orgs/SullyDevSquad/copilot/usage" # Update the orgs section with your own 
-ORG = "SullyDevSquad"    # Replace this with your GitHub organization name
+ORG = "SullyDevSquad"   # Replace this with your GitHub organization name
 
 def fetch_data():
     """
@@ -18,14 +18,12 @@ def fetch_data():
     response = requests.get(API_URL.format(org=ORG), headers=headers)
 
     if response.status_code == 200:
-        # Debugging: Print the response data
         data = response.json()
         print("API Response:", data)
         
-        # Check if the response is a list and extract the first item
         if isinstance(data, list):
             if len(data) > 0:
-                return data[0]  # Extract the first dictionary from the list
+                return data[0]
             else:
                 raise Exception("API returned an empty list.")
         elif isinstance(data, dict):
@@ -81,8 +79,10 @@ def generate_dashboard(metrics):
     </head>
     <body>
         <header>
-            <img src="logo.png" alt="Company Logo" class="logo">
-            <h1>GitHub Copilot ROI Dashboard</h1>
+            <div class="header-content">
+                <img src="logo.png" alt="Company Logo" class="logo">
+                <h1>GitHub Copilot ROI Dashboard</h1>
+            </div>
         </header>
         <section id="acceptance-rate">
             <h2>Acceptance Rate</h2>
@@ -116,11 +116,22 @@ def generate_dashboard(metrics):
         padding: 0;
     }
     header {
-        text-align: center;
         padding: 20px;
+        background: white;
+        border-bottom: 1px solid #ddd;
+    }
+    .header-content {
+        display: flex;
+        align-items: center;
     }
     .logo {
-        max-width: 150px;
+        max-width: 225px; /* Increased by 50% from 150px */
+        height: auto;
+        margin-right: 20px;
+    }
+    h1 {
+        margin: 0;
+        font-size: 1.5em;
     }
     section {
         margin: 20px;
