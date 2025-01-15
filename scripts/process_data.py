@@ -3,8 +3,8 @@ import json
 import requests
 
 # GitHub API endpoint and organization
-API_URL = "https://api.github.com/orgs/{org}/copilot/usage"
-ORG = "your_actual_org_name_here"  # Replace this with your GitHub organization name
+API_URL = "https://api.github.com/orgs/SullyDevSquad/copilot/usage" # Update the orgs section with your own 
+ORG = "SullyDevSquad"    
 
 def fetch_data():
     """
