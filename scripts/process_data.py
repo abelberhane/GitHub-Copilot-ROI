@@ -1,10 +1,10 @@
 import os
-import json
 import requests
+import json
 
 # GitHub API endpoint and organization
 API_URL = "https://api.github.com/orgs/SullyDevSquad/copilot/usage" # Update the orgs section with your own 
-ORG = "SullyDevSquad"    
+ORG = "SullyDevSquad"    # Replace this with your GitHub organization name
 
 def fetch_data():
     """
@@ -19,8 +19,19 @@ def fetch_data():
 
     if response.status_code == 200:
         # Debugging: Print the response data
-        print("API Response:", response.json())
-        return response.json()
+        data = response.json()
+        print("API Response:", data)
+        
+        # Check if the response is a list and extract the first item
+        if isinstance(data, list):
+            if len(data) > 0:
+                return data[0]  # Extract the first dictionary from the list
+            else:
+                raise Exception("API returned an empty list.")
+        elif isinstance(data, dict):
+            return data
+        else:
+            raise Exception("Unexpected data format from the API.")
     else:
         raise Exception(f"Failed to fetch data: {response.status_code} {response.text}")
 
@@ -28,15 +39,13 @@ def calculate_metrics(data):
     """
     Calculate key metrics for the dashboard.
     """
-    # Ensure the response is a dictionary
-    if isinstance(data, list):
-        raise Exception("Unexpected data format: Expected a dictionary, got a list.")
-
-    suggested_lines = data.get("suggested_lines", 0)
-    accepted_lines = data.get("accepted_lines", 0)
-    total_users = data.get("total_users", 0)
-    dau = data.get("dau", [])
+    suggested_lines = data.get("total_lines_suggested", 0)
+    accepted_lines = data.get("total_lines_accepted", 0)
+    total_users = data.get("total_active_users", 0)
     active_chat_users = data.get("total_active_chat_users", 0)
+
+    # Use breakdown for DAU if available
+    dau = [day.get("total_active_users", 0) for day in data.get("breakdown", [])]
 
     acceptance_rate = (accepted_lines / suggested_lines) * 100 if suggested_lines else 0
     adoption_rate = (sum(dau) / total_users) * 100 if total_users else 0
