@@ -52,7 +52,7 @@ def generate_dashboard(metrics):
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Avengers Dashboard</title>
+        <title>Avengers - Copilot ROI Dashboard</title>
         <link rel="stylesheet" href="style.css">
         <script src="script.js"></script>
     </head>
@@ -60,7 +60,7 @@ def generate_dashboard(metrics):
         <header>
             <div class="header-content">
                 <img src="logo.png" alt="SHIELD Logo" class="logo">
-                <h1>Avengers Dashboard</h1>
+                <h1>Avengers - Copilot ROI Dashboard</h1>
             </div>
         </header>
         <main>
