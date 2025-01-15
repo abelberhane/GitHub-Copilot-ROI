@@ -1,22 +1,64 @@
-/* public/style.css */
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Poppins', sans-serif;
+    background-color: #1b1f2a; /* Dark SHIELD-like background */
+    color: #e0e4f1; /* Silver text */
     margin: 0;
     padding: 0;
 }
 
-h1 {
-    color: #333;
-    text-align: center;
-    padding: 20px;
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #0d47a1, #1976d2); /* Baby blue gradient */
+    padding: 1rem 2rem;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+header .logo {
+    max-width: 100px;
+}
+header h1 {
+    font-size: 1.8rem;
 }
 
-.chart-container {
-    width: 80%;
-    margin: auto;
-    padding: 20px;
-    background: white;
+/* Sections */
+main {
+    padding: 2rem;
+}
+section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #2b3242; /* SHIELD panel background */
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+section h2 {
+    font-size: 1.5rem;
+    color: #80d8ff; /* Light blue */
+}
+section p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+canvas {
+    width: 100%;
+    max-height: 300px;
+}
+
+/* Button Styling */
+button {
+    background-color: #80d8ff; /* Light blue */
+    color: #1b1f2a; /* Dark background */
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+button:hover {
+    background-color: #40c4ff; /* Brighter blue */
+    transform: scale(1.05);
 }
