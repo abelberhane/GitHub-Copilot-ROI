@@ -9,7 +9,7 @@ The purpose of this repository is to gain insights into how companies can determ
 3. [Installation](#installation)
 4. [Usage](#usage)
 5. [Contributing](#contributing)
-6. [License](#license)
+6. [License](#license) 
 7. [Acknowledgements](#acknowledgements)
 
 ## Introduction
