@@ -1,0 +1,36 @@
+name: Generate Dashboard and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Trigger when changes are pushed to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Fetch data using the GitHub API
+      - name: Fetch Data from GitHub API
+        run: |
+          echo "Fetching data..."
+          curl -H "Authorization: token ${{ secrets.API_PAT_TOKEN }}" \
+               -H "Accept: application/vnd.github.v3+json" \
+               https://api.github.com/repos/abelberhane/GitHub-Copilot-ROI > data.json
+
+      # Step 3: Process data (ROI calculations)
+      - name: Process Data
+        run: |
+          echo "Processing data..."
+          python process_data.py  # Use a Python script to generate HTML/JS
+
+      # Step 4: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public  # Directory containing generated static files
